@@ -31,17 +31,26 @@ services:
       - db_net
   backend:
     restart: always
-    container_name: app
+    container_name: backend
     command: >
       bash -c "python3 create_db_production.py && gunicorn -w4 -b 0.0.0.0:5000 --log-level=debug main:http_api"
     expose:
       - 5000
-    build: .
+    build: ./backend
     networks:
       - app_net
       - db_net
     depends_on:
       - mysql
+  fake_frontend:
+    restart: always
+    container_name: fake_frontend
+    command: node ./fake_frontend/main.js
+    build: ./fake_frontend
+    networks:
+      - app_net
+    depends_on:
+      - backend
 
 networks:
   app_net:

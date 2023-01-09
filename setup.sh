@@ -24,4 +24,5 @@ mv ./src/fake_frontend/_tsconfig.json ./tsconfig.json
 npm install
 npm run build
 cd ..
-cp ./docker/Dockerfile ./backend
+cp ./docker/Dockerfile_backend ./backend/Dockerfile
+cp ./docker/Dockerfile_ff ./fake_frontend/Dockerfile
