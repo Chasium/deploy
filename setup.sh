@@ -1,7 +1,7 @@
-rm -f ./frontend
-rm -f ./fake_frontend
-rm -f ./apigen
-rm -f ./backend
+rm -rf ./frontend
+rm -rf ./fake_frontend
+rm -rf ./apigen
+rm -rf ./backend
 mkdir frontend
 mkdir fake_frontend
 mkdir apigen
