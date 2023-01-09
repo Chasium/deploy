@@ -1,0 +1,50 @@
+version: '3'
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 8000:8000
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./frontend/dist:/etc/nginx/html
+    networks:
+      - app_net
+  mysql:
+    container_name: mysql
+    restart: always
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=chasium
+      - TZ=Asia/Shanghai
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci"
+      ]
+    expose:
+      - 3306
+    networks:
+      - db_net
+  backend:
+    restart: always
+    container_name: app
+    command: >
+      bash -c "python3 create_db_production.py && gunicorn -w4 -b 0.0.0.0:5000 --log-level=debug main:http_api"
+    expose:
+      - 5000
+    build: .
+    networks:
+      - app_net
+      - db_net
+    depends_on:
+      - mysql
+
+networks:
+  app_net:
+    driver: bridge
+  db_net:
+    driver: bridge
