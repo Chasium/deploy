@@ -20,9 +20,12 @@ cd ../frontend
 npm install
 npm run build
 cd ../fake_frontend
+npm install
 rm ./*.json
 mv ./src/fake_frontend/_tsconfig.json ./tsconfig.json
-npm install
+rm -rf ./src/router
+rm -rf ./src/stores
+rm -f ./src/main.ts
 npm run build
 cd ..
 cp ./docker/Dockerfile_backend ./backend/Dockerfile
