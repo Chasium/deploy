@@ -1,3 +1,4 @@
+#!/bin/sh
 rm -rf ./frontend
 rm -rf ./fake_frontend
 rm -rf ./apigen
