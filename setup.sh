@@ -26,7 +26,7 @@ mv ./src/fake_frontend/_tsconfig.json ./tsconfig.json
 rm -rf ./src/router
 rm -rf ./src/stores
 rm -f ./src/main.ts
-npm run build
+npm run tsbuild
 cd ..
 cp ./docker/Dockerfile_backend ./backend/Dockerfile
 cp ./docker/Dockerfile_ff ./fake_frontend/Dockerfile
